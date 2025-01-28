@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: js/centennial_data.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: js/centennial_data.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict"
+
+
+/**
+ * buildingsLayer
+ * 
+ * a global variable to store the buildings layer once it has been added to the map
+ * &lt;br>global as will need to be referened by the buildings layer remove functionality
+ * 
+ */
+let buildingsLayer;
+
+
+/**
+ * @function showBuildings
+ * 
+ * @description show the buildings layer, which is served via the dataAPI from the centennial database
+ * 
+ */
+function showBuildings(){
+	if (buildingsLayer) {
+        mymap.removeLayer(buildingsLayer);
+    }
+	let layerURL = document.location.origin + "/api/geojson24/getGeoJSON/"+"ucfscde/buildings/building_id/location";
+	$.ajax({url: layerURL, crossDomain: true,success: function(result){
+
+    		// add the JSON layer onto the map - it will appear using the default icons
+	 		// the onEachFeature command loops through every featulre in the GeoJSON dataset and creates the popup for each one
+    		buildingsLayer = L.geoJson(result, {
+				onEachFeature: function (f, l) {
+					l.bindPopup('&lt;pre>'+JSON.stringify(f.properties,null,' ').replace(/[\{\}"]/g,'')+'&lt;/pre>');
+				}
+			}).addTo(mymap);
+
+    		// change the map zoom so that all the data is shown
+    		mymap.fitBounds(buildingsLayer.getBounds());
+		} // end of the inner function
+	}); // end of the ajax request
+}
+
+/**
+ * @function removeBuildings
+ * 
+ * @description remove the buildings layer showed on the map
+ * 
+ */
+
+function removeBuildings(){
+	// we use a try / catch statement here - this means that if the layer has not yet been added we won't get an error message
+	try {
+			mymap.removeLayer(buildingsLayer);
+		} catch (err) {
+
+	}
+}
+
+
+
+/**
+ * universityLayer
+ * 
+ * a global variable to store the university layer once it has been added to the map
+ * &lt;br>global as will need to be referened by the university layer remove functionality
+ * 
+ */
+let universityLayer;
+
+
+/**
+ * @function showUniversity
+ * 
+ * @description show the university layer, which is served via the dataAPI from the centennial database
+ * 
+ */
+function showUniversity(){
+	if (universityLayer) {
+        mymap.removeLayer(universityLayer);
+    }
+	let layerURL = document.location.origin + "/api/geojson24/getGeoJSON/"+"ucfscde/university/university_id/location";
+	$.ajax({url: layerURL, crossDomain: true,success: function(result){
+
+    		// add the JSON layer onto the map - it will appear using the default icons
+	 		// the onEachFeature command loops through every featulre in the GeoJSON dataset and creates the popup for each one
+    		universityLayer = L.geoJson(result, {
+				onEachFeature: function (f, l) {
+					l.bindPopup('&lt;pre>'+JSON.stringify(f.properties,null,' ').replace(/[\{\}"]/g,'')+'&lt;/pre>');
+				}
+			}).addTo(mymap);
+
+    		// change the map zoom so that all the data is shown
+    		mymap.fitBounds(universityLayer.getBounds());
+		} // end of the inner function
+	}); // end of the ajax request
+}
+
+
+/**
+ * @function removeUniversity
+ * 
+ * @description remove the university layer showed on the map
+ * 
+ */
+
+function removeUniversity(){
+	// we use a try / catch statement here - this means that if the layer has not yet been added we won't get an error message
+	try {
+			mymap.removeLayer(universityLayer);
+		} catch (err) {
+
+	}
+
+}
+
+
+/**
+ * roomsLayer
+ * 
+ * a global variable to store the rooms layer once it has been added to the map
+ * &lt;br>global as will need to be referened by the rooms layer remove functionality
+ * 
+ */
+let roomsLayer;
+
+
+/**
+ * @function showRooms
+ * 
+ * @description show the rooms layer, which is served via the dataAPI from the centennial database
+ * 
+ */
+function showRooms(){
+	if (roomsLayer) {
+        mymap.removeLayer(roomsLayer);
+    }
+	let layerURL = document.location.origin + "/api/geojson24/getGeoJSON/"+"ucfscde/rooms/room_id/location";
+	$.ajax({url: layerURL, crossDomain: true,success: function(result){
+
+    		// add the JSON layer onto the map - it will appear using the default icons
+	 		// the onEachFeature command loops through every featulre in the GeoJSON dataset and creates the popup for each one
+    		roomsLayer = L.geoJson(result, {
+				onEachFeature: function (f, l) {
+					l.bindPopup('&lt;pre>'+JSON.stringify(f.properties,null,' ').replace(/[\{\}"]/g,'')+'&lt;/pre>');
+				}
+			}).addTo(mymap);
+
+    		// change the map zoom so that all the data is shown
+    		mymap.fitBounds(roomsLayer.getBounds());
+		} // end of the inner function
+	}); // end of the ajax request
+}
+
+/**
+ * @function removeRooms
+ * 
+ * @description remove the rooms layer showed on the map
+ * 
+ */
+
+function removeRooms(){
+	// we use a try / catch statement here - this means that if the layer has not yet been added we won't get an error message
+	try {
+			mymap.removeLayer(roomsLayer);
+		} catch (err) {
+
+	}
+}
+
+
+/**
+ * temperature_sensorsLayer
+ * 
+ * a global variable to store the temperature sensors layer once it has been added to the map
+ * &lt;br>global as will need to be referened by the temperature sensors layer remove functionality
+ * 
+ */
+let temperature_sensorsLayer;
+
+
+/**
+ * @function showTemperature_sensors
+ * 
+ * @description show the temperature sensors layer, which is served via the dataAPI from the centennial database
+ * 
+ */
+function showTemperature_sensors(){
+	if (temperature_sensorsLayer) {
+        mymap.removeLayer(temperature_sensorsLayer);
+    }
+	let layerURL = document.location.origin + "/api/geojson24/getGeoJSON/"+"ucfscde/temperature_sensors/sensor_id/location";
+	$.ajax({url: layerURL, crossDomain: true,success: function(result){
+
+    		// add the JSON layer onto the map - it will appear using the default icons
+	 		// the onEachFeature command loops through every featulre in the GeoJSON dataset and creates the popup for each one
+    		temperature_sensorsLayer = L.geoJson(result, {
+				onEachFeature: function (f, l) {
+					l.bindPopup('&lt;pre>'+JSON.stringify(f.properties,null,' ').replace(/[\{\}"]/g,'')+'&lt;/pre>');
+				}
+			}).addTo(mymap);
+
+    		// change the map zoom so that all the data is shown
+    		mymap.fitBounds(temperature_sensorsLayer.getBounds());
+		} // end of the inner function
+	}); // end of the ajax request
+}
+
+
+/**
+ * @function removeTemperature_sensors
+ * 
+ * @description remove the temperature sensors layer showed in the map
+ * 
+ */
+
+function removeTemperature_sensors(){
+	// we use a try / catch statement here - this means that if the layer has not yet been added we won't get an error message
+	try {
+			mymap.removeLayer(temperature_sensorsLayer);
+		} catch (err) {
+
+	}
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="eData.dateOptions.html">dateOptions</a></li><li><a href="moment.tz.html">tz</a></li></ul><h3>Global</h3><ul><li><a href="global.html#buildingsLayer">buildingsLayer</a></li><li><a href="global.html#busStopsLayer">busStopsLayer</a></li><li><a href="global.html#calcDistanceFromFixedPoint">calcDistanceFromFixedPoint</a></li><li><a href="global.html#calculateDistance">calculateDistance</a></li><li><a href="global.html#closeDialog">closeDialog</a></li><li><a href="global.html#distanceFromPoint">distanceFromPoint</a></li><li><a href="global.html#errorPosition">errorPosition</a></li><li><a href="global.html#ethernetLayer">ethernetLayer</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#keyPressZoomToPoint">keyPressZoomToPoint</a></li><li><a href="global.html#layerControl">layerControl</a></li><li><a href="global.html#loadMap">loadMap</a></li><li><a href="global.html#locationTrackerId">locationTrackerId</a></li><li><a href="global.html#mymap">mymap</a></li><li><a href="global.html#onMapClick">onMapClick</a></li><li><a href="global.html#onMapClickDiv">onMapClickDiv</a></li><li><a href="global.html#removeBuildings">removeBuildings</a></li><li><a href="global.html#removeBusStops">removeBusStops</a></li><li><a href="global.html#removeRooms">removeRooms</a></li><li><a href="global.html#removeTemperature_sensors">removeTemperature_sensors</a></li><li><a href="global.html#removeUniversity">removeUniversity</a></li><li><a href="global.html#roomsLayer">roomsLayer</a></li><li><a href="global.html#saveDialog">saveDialog</a></li><li><a href="global.html#showBuildings">showBuildings</a></li><li><a href="global.html#showBusStops">showBusStops</a></li><li><a href="global.html#showDialog">showDialog</a></li><li><a href="global.html#showLayerList">showLayerList</a></li><li><a href="global.html#showLayerToLoad">showLayerToLoad</a></li><li><a href="global.html#showPosition">showPosition</a></li><li><a href="global.html#showRooms">showRooms</a></li><li><a href="global.html#showTemperature_sensors">showTemperature_sensors</a></li><li><a href="global.html#showUniversity">showUniversity</a></li><li><a href="global.html#swtichLocationServicesOn">swtichLocationServicesOn</a></li><li><a href="global.html#temperature_sensorsLayer">temperature_sensorsLayer</a></li><li><a href="global.html#universityLayer">universityLayer</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 04 2024 12:25:54 GMT+0000 (Greenwich Mean Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

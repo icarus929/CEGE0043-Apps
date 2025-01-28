@@ -1,0 +1,16 @@
+<div id="petrolstationForm">
+    <p>
+      <label>Petrol Station Name:
+        <input id="petrolStationName"  name="petrolStationName" type="text" size="20">
+      </label>
+      <br>
+      <label>Last Inspected:
+        <input id="lastInspected"  name="lastInspected" type="date">
+      </label>
+    </p>
+
+    <div>
+      <button id="closeButton" onclick="closePetrolStationForm()">Cancel</button>
+      <button id="saveBtn" onclick="processPetrolStationData()">Save</button>
+    </div>
+</div>  

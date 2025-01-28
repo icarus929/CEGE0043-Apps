@@ -1,0 +1,24 @@
+<div id="priceQueueForm">
+  <p>
+    <label>Petrol Station Name: 
+      <input id="petrolStationName" name="petrolStationName" type="text" value="station1" size="20" disabled>
+    </label>
+    <br>
+    <label>Inspection Date: 
+      <input id="inspectionDate" name="inspectionDate" type="text" value="2024-03-03" disabled>
+    </label>
+  </p>
+  
+  <!-- Placeholder for dynamic radio buttons -->
+  <div id="radioButtonsPlaceholder"></div>
+  
+  <p>
+    <label>Price of Unleaded Petrol in £ per litre: 
+      <input id="pricePerLitre" name="pricePerLitre" type="text">
+    </label>
+  </p>
+  <div>
+    <button id="closeButton" onclick="closePriceQueueForm()">Cancel</button>
+    <button id="saveBtn" onclick="processPriceQueueData()">Save</button>
+  </div>
+</div>
